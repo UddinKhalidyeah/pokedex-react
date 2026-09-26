@@ -1,0 +1,305 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #fefefe;
+  color: black;
+  text-align: center;
+}
+
+h1 {
+  margin: 20px;
+  color: black;
+}
+
+h2 {
+  margin: 20px;
+  color: black;
+}
+
+.search {
+  margin: 20px;
+}
+
+.searchbox {
+  width: 300px;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+}
+
+button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.type-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.type {
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: white;
+  font-size: 16px;
+  text-transform: capitalize;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.type.normal {
+  background-color: #a8a77a;
+}
+
+.type.fire {
+  background-color: #ee8130;
+}
+
+.type.water {
+  background-color: #6390f0;
+}
+
+.type.electric {
+  background-color: #f7d02c;
+  color: black;
+}
+
+.type.grass {
+  background-color: #7ac74c;
+}
+
+.type.ice {
+  background-color: #96d9d6;
+  color: black;
+}
+
+.type.fighting {
+  background-color: #c22e28;
+}
+
+.type.poison {
+  background-color: #a33ea1;
+}
+
+.type.ground {
+  background-color: #e2bf65;
+  color: black;
+}
+
+.type.flying {
+  background-color: #a98ff3;
+}
+
+.type.psychic {
+  background-color: #f95587;
+}
+
+.type.bug {
+  background-color: #a6b91a;
+}
+
+.type.rock {
+  background-color: #b6a136;
+}
+
+.type.ghost {
+  background-color: #735797;
+}
+
+.type.dragon {
+  background-color: #6f35fc;
+}
+
+.type.dark {
+  background-color: #705746;
+}
+
+.type.steel {
+  background-color: #b7b7ce;
+  color: black;
+}
+
+.type.fairy {
+  background-color: #d685ad;
+  color: black;
+}
+
+.pokemon-info {
+  width: 600px;
+  max-width: 90%;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: white;
+  border-radius: 20px;
+  border: 5px solid black;
+}
+
+.pokemon-info img {
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+}
+
+.pokemon-name {
+  text-transform: capitalize;
+  margin-bottom: 5px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.info-grid div {
+  padding: 12px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+}
+
+.info-grid strong {
+  display: block;
+  font-size: 16px;
+}
+
+.info-grid p {
+  margin: 5px 0 0;
+  font-size: 17px;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+.info-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f1f1f1;
+  border-radius: 12px;
+}
+
+.info-section h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.info-section p {
+  margin: 5px;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-bottom: 1px solid #ccc;
+  font-size: 17px;
+  text-transform: capitalize;
+}
+
+.stat:last-child {
+  border-bottom: none;
+}
+
+.moves {
+  line-height: 1.7;
+}
+
+.pokemon-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  padding: 20px;
+}
+
+.pokemon-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 15px;
+  border: 3px solid black;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pokemon-card:hover {
+  transform: scale(1.05);
+}
+
+.pokemon-card.selected {
+  border: 5px solid black;
+}
+
+.pokemon-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.pokemon-card p {
+  margin: 5px;
+  text-transform: capitalize;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 30px;
+}
+
+.pagination button {
+  margin: 0;
+}
+
+.pagination p {
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+
+  .pokemon-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .pokemon-container {
+    grid-template-columns: 1fr;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .searchbox {
+    width: 220px;
+  }
+
+}
