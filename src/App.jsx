@@ -28,7 +28,6 @@ function App() {
             .then(response => {
 
                 let list = response.data.results
-
                 let pokemonData = []
 
                 list.forEach(pokemon => {
@@ -39,7 +38,11 @@ function App() {
                             pokemonData.push(response.data)
 
                             if (pokemonData.length === list.length) {
-                                pokemonData.sort((a, b) => a.id - b.id)
+
+                                pokemonData.sort(
+                                    (a, b) => a.id - b.id
+                                )
+
                                 setPokemons(pokemonData)
                                 setLoading(false)
                             }
@@ -90,6 +93,7 @@ function App() {
     function nextPage() {
 
         if (page < 52) {
+
             setPage(page + 1)
             setSelectedPokemon(null)
 
@@ -103,6 +107,7 @@ function App() {
     function previousPage() {
 
         if (page > 1) {
+
             setPage(page - 1)
             setSelectedPokemon(null)
 
@@ -128,108 +133,207 @@ function App() {
     return (
         <>
 
-            <h1>Pokémon API</h1>
+            {/* HEADER */}
 
-            <div className="search">
+            <header className="header">
 
-                <input
-                    className="searchbox"
-                    type="text"
-                    placeholder="Enter Pokémon name..."
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                    onKeyDown={e => {
-                        if (e.key === "Enter") {
-                            searchPokemon()
-                        }
-                    }}
-                />
+                <div className="terminal-status">
+                    <span className="status-dot"></span>
+                    SYSTEM ONLINE
+                </div>
 
-                <button onClick={searchPokemon}>
-                    Search
+                <h1>
+                    <span className="bracket">&lt;</span>
+                    POKÉMON API
+                    <span className="bracket">/&gt;</span>
+                </h1>
+
+                <p className="subtitle">
+                    POKÉDEX DATABASE // ONLINE
+                </p>
+
+            </header>
+
+
+            {/* NAVIGATION */}
+
+            <div className="top-navigation">
+
+                <button onClick={home}>
+                    ⌂ HOME
+                </button>
+
+                <button
+                    onClick={() =>
+                        window.scrollTo({
+                            top: document.body.scrollHeight,
+                            behavior: "smooth"
+                        })
+                    }
+                >
+                    ◈ DATABASE
                 </button>
 
             </div>
+
+
+            {/* SEARCH */}
+
+            <div className="search">
+
+                <div className="search-label">
+                    &gt; SEARCH_DATABASE
+                </div>
+
+                <div className="search-wrapper">
+
+                    <span className="search-icon">
+                        ⌕
+                    </span>
+
+                    <input
+                        className="searchbox"
+                        type="text"
+                        placeholder="Enter Pokémon name..."
+                        value={search}
+                        onChange={e =>
+                            setSearch(e.target.value)
+                        }
+                        onKeyDown={e => {
+
+                            if (e.key === "Enter") {
+                                searchPokemon()
+                            }
+
+                        }}
+                    />
+
+                    <button
+                        className="search-button"
+                        onClick={searchPokemon}
+                    >
+                        SEARCH
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            {/* SELECTED POKÉMON */}
 
             {selectedPokemon && (
 
                 <div className="pokemon-info">
 
-                    <h2>Pokémon Information</h2>
+                    <div className="panel-header">
 
-                    <img
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${selectedPokemon.id}.png`}
-                        alt={selectedPokemon.name}
-                    />
+                        <span>
+                            POKÉMON_DATA
+                        </span>
 
-                    <h2 className="pokemon-name">
-                        {selectedPokemon.name}
+                        <span className="live">
+                            ● LIVE
+                        </span>
+
+                    </div>
+
+
+                    <h2>
+                        POKÉMON INFORMATION
                     </h2>
 
-                    <div className="type-container">
 
-                        {selectedPokemon.types.map(type => (
+                    <div className="pokemon-display">
 
-                            <span
-                                className={`type ${type.type.name}`}
-                                key={type.type.name}
-                            >
-                                {type.type.name}
-                            </span>
+                        <div className="pokemon-image-box">
 
-                        ))}
+                            <div className="scan-line"></div>
 
+                            <img
+                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${selectedPokemon.id}.png`}
+                                alt={selectedPokemon.name}
+                            />
+
+                        </div>
+
+
+                        <div className="pokemon-main-data">
+
+                            <div className="pokemon-number">
+                                #{String(selectedPokemon.id).padStart(3, "0")}
+                            </div>
+
+                            <h2 className="pokemon-name">
+                                {selectedPokemon.name}
+                            </h2>
+
+                            <div className="type-container">
+
+                                {selectedPokemon.types.map(type => (
+
+                                    <span
+                                        className={`type ${type.type.name}`}
+                                        key={type.type.name}
+                                    >
+                                        {type.type.name}
+                                    </span>
+
+                                ))}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    {/* BASIC INFORMATION */}
+
+                    <div className="section-title">
+                        // BASIC_INFORMATION
                     </div>
 
                     <div className="info-grid">
 
                         <div>
                             <strong>ID</strong>
-                            <p>#{selectedPokemon.id}</p>
+                            <p>
+                                #{selectedPokemon.id}
+                            </p>
                         </div>
 
                         <div>
-                            <strong>Species</strong>
-                            <p>{selectedPokemon.species.name}</p>
+                            <strong>SPECIES</strong>
+                            <p>
+                                {selectedPokemon.species.name}
+                            </p>
                         </div>
 
                         <div>
-                            <strong>Height</strong>
-                            <p>{selectedPokemon.height / 10} m</p>
+                            <strong>HEIGHT</strong>
+                            <p>
+                                {selectedPokemon.height / 10} m
+                            </p>
                         </div>
 
                         <div>
-                            <strong>Weight</strong>
-                            <p>{selectedPokemon.weight / 10} kg</p>
-                        </div>
-
-                        <div>
-                            <strong>Experience</strong>
-                            <p>{selectedPokemon.base_experience}</p>
-                        </div>
-
-                        <div>
-                            <strong>Order</strong>
-                            <p>{selectedPokemon.order}</p>
+                            <strong>WEIGHT</strong>
+                            <p>
+                                {selectedPokemon.weight / 10} kg
+                            </p>
                         </div>
 
                     </div>
 
-                    <div className="info-section">
 
-                        <h3>Abilities</h3>
-
-                        <p>
-                            {selectedPokemon.abilities.map(
-                                ability => ability.ability.name
-                            ).join(", ")}
-                        </p>
-
-                    </div>
+                    {/* STATS */}
 
                     <div className="info-section">
 
-                        <h3>Base Stats</h3>
+                        <div className="section-title">
+                            // BASE_STATS
+                        </div>
 
                         {selectedPokemon.stats.map(stat => (
 
@@ -242,7 +346,7 @@ function App() {
                                     {stat.stat.name}
                                 </span>
 
-                                <span>
+                                <span className="stat-value">
                                     {stat.base_stat}
                                 </span>
 
@@ -252,16 +356,21 @@ function App() {
 
                     </div>
 
+
+                    {/* MOVES */}
+
                     <div className="info-section">
 
-                        <h3>Moves</h3>
+                        <div className="section-title">
+                            // AVAILABLE_MOVES
+                        </div>
 
                         <p className="moves">
 
                             {selectedPokemon.moves
-                                .slice(0, 10)
+                                .slice(0, 12)
                                 .map(move => move.move.name)
-                                .join(", ")}
+                                .join(" • ")}
 
                         </p>
 
@@ -271,33 +380,36 @@ function App() {
 
             )}
 
-            <div className="top-navigation">
 
-                <button onClick={home}>
-                    Home
-                </button>
+            {/* DATABASE HEADER */}
 
-                <button
-                    onClick={previousPage}
-                    disabled={page === 1}
-                >
-                    Previous
-                </button>
+            <div className="database-header">
 
-                <button
-                    onClick={nextPage}
-                    disabled={page === 52}
-                >
-                    Next
-                </button>
+                <div>
+                    <span className="green-dot"></span>
+                    DATABASE CONNECTED
+                </div>
+
+                <span>
+                    PAGE {page} / 52
+                </span>
 
             </div>
 
-            <h2>Pokémon List</h2>
+
+            {/* LOADING / POKÉMON */}
 
             {loading ? (
 
-                <p>Loading Pokémon...</p>
+                <div className="loading">
+
+                    <div className="loading-spinner"></div>
+
+                    <p>
+                        LOADING POKÉMON DATABASE...
+                    </p>
+
+                </div>
 
             ) : (
 
@@ -306,29 +418,41 @@ function App() {
                     {pokemons.map(pokemon => (
 
                         <div
-                            className={
+                            className={`pokemon-card ${
                                 selectedPokemon &&
                                 selectedPokemon.id === pokemon.id
-                                    ? "pokemon-card selected"
-                                    : "pokemon-card"
-                            }
+                                    ? "selected"
+                                    : ""
+                            }`}
                             key={pokemon.id}
-                            onClick={() => clickPokemon(pokemon)}
+                            onClick={() =>
+                                clickPokemon(pokemon)
+                            }
                         >
 
-                            <img
-                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
-                                alt={pokemon.name}
-                            />
+                            <div className="card-number">
+                                #{String(pokemon.id).padStart(3, "0")}
+                            </div>
 
-                            <p>{pokemon.name}</p>
+                            <div className="card-image">
 
-                            <div className="type-container">
+                                <img
+                                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+                                    alt={pokemon.name}
+                                />
+
+                            </div>
+
+                            <p>
+                                {pokemon.name}
+                            </p>
+
+                            <div className="card-types">
 
                                 {pokemon.types.map(type => (
 
                                     <span
-                                        className={`type ${type.type.name}`}
+                                        className={`mini-type ${type.type.name}`}
                                         key={type.type.name}
                                     >
                                         {type.type.name}
@@ -346,27 +470,52 @@ function App() {
 
             )}
 
+
+            {/* PAGINATION */}
+
             <div className="pagination">
 
                 <button
                     onClick={previousPage}
                     disabled={page === 1}
                 >
-                    Previous
+                    ◀ PREVIOUS
                 </button>
 
                 <p>
-                    Page {page}
+                    <span className="page-symbol">
+                        [ {page} ]
+                    </span>
                 </p>
 
                 <button
                     onClick={nextPage}
                     disabled={page === 52}
                 >
-                    Next
+                    NEXT ▶
                 </button>
 
             </div>
+
+
+            {/* FOOTER */}
+
+            <footer>
+
+                <div>
+                    POKÉDEX SYSTEM v2.0
+                </div>
+
+                <div>
+                    API STATUS:
+                    <span> ONLINE</span>
+                </div>
+
+                <div>
+                    &lt;/&gt; POWERED BY POKEAPI
+                </div>
+
+            </footer>
 
         </>
     )
